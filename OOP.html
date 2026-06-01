@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OOP 개념 - OOP Docs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="home.html">OOP Docs</a>
+
+      <nav class="top-nav" aria-label="주요 메뉴">
+        <a href="home.html">Home</a>
+        <a class="active" href="OOP.html">OOP</a>
+        <a href="Java.html">Java</a>
+        <a href="Python.html">Python</a>
+        <a href="compare.html">Compare</a>
+      </nav>
+
+      <div class="header-tools">
+        <form class="header-search" data-search-form role="search">
+          <input type="search" list="search-options" placeholder="문서 검색..." aria-label="문서 검색" />
+        </form>
+        <label class="theme-toggle" aria-label="다크모드 전환">
+          <input class="theme-check" type="checkbox" />
+          <span>◐</span>
+        </label>
+      </div>
+    </header>
+
+    <datalist id="search-options">
+      <option value="OOP란?"></option>
+      <option value="객체"></option>
+      <option value="클래스"></option>
+      <option value="상속"></option>
+      <option value="다형성"></option>
+      <option value="Java 생성자"></option>
+      <option value="Java ArrayList"></option>
+      <option value="Python 리스트"></option>
+      <option value="Python 클래스"></option>
+      <option value="코드 문법 비교"></option>
+    </datalist>
+
+    <div class="docs-layout">
+      <aside class="sidebar">
+        <h3>OOP</h3>
+        <ul>
+          <li><a href="#what-is-oop">OOP란?</a></li>
+          <li><a href="#object">객체(Object)</a></li>
+          <li><a href="#class">클래스(Class)</a></li>
+          <li><a href="#instance">인스턴스(Instance)</a></li>
+          <li><a href="#attribute">속성(Attribute)</a></li>
+          <li><a href="#method">메서드(Method)</a></li>
+          <li><a href="#encapsulation">캡슐화</a></li>
+          <li><a href="#inheritance">상속</a></li>
+          <li><a href="#polymorphism">다형성</a></li>
+          <li><a href="#abstraction">추상화</a></li>
+          <li><a href="#constructor">생성자</a></li>
+          <li><a href="#this">this</a></li>
+          <li><a href="#access">접근 제어자</a></li>
+          <li><a href="#getter-setter">Getter / Setter</a></li>
+          <li><a href="#overloading">오버로딩</a></li>
+          <li><a href="#overriding">오버라이딩</a></li>
+          <li><a href="#abstract-class">추상 클래스</a></li>
+          <li><a href="#interface">인터페이스</a></li>
+          <li><a href="#association">연관 관계</a></li>
+          <li><a href="#aggregation">집합 관계</a></li>
+          <li><a href="#composition">합성 관계</a></li>
+          <li><a href="#solid">SOLID 원칙</a></li>
+          <li><a href="#pros">객체지향의 장점</a></li>
+          <li><a href="#cons">객체지향의 단점</a></li>
+        </ul>
+      </aside>
+
+      <main class="content">
+        <span class="doc-label">OOP / Concepts</span>
+        <h1 id="what-is-oop">객체지향 프로그래밍</h1>
+        <div class="official-links">
+          <a href="https://docs.oracle.com/javase/tutorial/java/concepts/" target="_blank" rel="noreferrer">Java OOP 문서</a>
+          <a href="https://docs.python.org/3/tutorial/classes.html" target="_blank" rel="noreferrer">Python Classes</a>
+        </div>
+        <p>
+          OOP는 프로그램을 데이터와 기능을 가진 객체들의 협력으로 바라보는 방식입니다.
+          코드를 역할과 책임 단위로 나누기 때문에 규모가 커져도 구조를 이해하고
+          변경하기 쉬워집니다.
+        </p>
+        <div class="compare-grid">
+          <div class="compare-card">
+            <h3>Java</h3>
+            <pre><code>class User {
+  String name;
+
+  void login() {
+    System.out.println(name + " logged in");
+  }
+}</code></pre>
+          </div>
+          <div class="compare-card">
+            <h3>Python</h3>
+            <pre><code>class User:
+    def __init__(self, name):
+        self.name = name
+
+    def login(self):
+        print(f"{self.name} logged in")</code></pre>
+          </div>
+        </div>
+
+        <section class="doc-section" id="object">
+          <h2>객체(Object)</h2>
+          <p>
+            객체는 상태와 행동을 함께 가진 독립적인 단위입니다. 현실의 사용자, 주문,
+            게시글처럼 프로그램 안에서 의미 있는 대상을 표현합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>User user = new User();
+user.name = "Jin";
+user.login();</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>user = User("Jin")
+user.login()</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="class">
+          <h2>클래스(Class)</h2>
+          <p>
+            클래스는 객체를 만들기 위한 설계도입니다. 어떤 속성을 가지고 어떤 메서드를
+            실행할 수 있는지 정의합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class Product {
+  String name;
+  int price;
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="instance">
+          <h2>인스턴스(Instance)</h2>
+          <p>
+            인스턴스는 클래스로부터 실제로 생성된 객체입니다. 같은 클래스로 만든
+            인스턴스라도 각자 다른 값을 가질 수 있습니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>Product keyboard = new Product();
+Product mouse = new Product();</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>keyboard = Product("Keyboard", 50000)
+mouse = Product("Mouse", 20000)</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="attribute">
+          <h2>속성(Attribute)</h2>
+          <p>
+            속성은 객체가 가진 데이터입니다. Java에서는 보통 필드라고 부르고,
+            Python에서는 인스턴스 변수라고 부르는 경우가 많습니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class User {
+  String name;
+  int level;
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class User:
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="method">
+          <h2>메서드(Method)</h2>
+          <p>
+            메서드는 객체가 수행할 수 있는 행동입니다. 객체의 속성을 읽거나 변경하고,
+            다른 객체와 협력하는 코드를 담습니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>void levelUp() {
+  level++;
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>def level_up(self):
+    self.level += 1</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="encapsulation">
+          <h2>캡슐화</h2>
+          <p>
+            캡슐화는 데이터와 동작을 하나로 묶고, 객체 내부 상태를 외부에서 함부로
+            바꾸지 못하게 보호하는 방식입니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class Account {
+  private int balance;
+
+  void deposit(int amount) {
+    if (amount > 0) balance += amount;
+  }
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class Account:
+    def __init__(self):
+        self._balance = 0
+
+    def deposit(self, amount):
+        if amount > 0:
+            self._balance += amount</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="inheritance">
+          <h2>상속</h2>
+          <p>
+            상속은 부모 클래스의 기능을 자식 클래스가 물려받는 기능입니다. 공통 코드를
+            재사용하고, 더 구체적인 클래스를 만들 때 사용합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class Member extends User {
+  int point;
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class Member(User):
+    def __init__(self, name):
+        super().__init__(name)
+        self.point = 0</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="polymorphism">
+          <h2>다형성</h2>
+          <p>
+            다형성은 같은 요청을 보내도 실제 객체에 따라 다른 동작이 실행되는
+            특징입니다. 코드가 구체 클래스보다 공통 타입에 의존하게 만듭니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>Payment payment = new CardPayment();
+payment.pay(10000);</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>payment = CardPayment()
+payment.pay(10000)</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="abstraction">
+          <h2>추상화</h2>
+          <p>
+            추상화는 중요한 특징만 드러내고 복잡한 구현은 숨기는 방식입니다. 사용자는
+            내부 구조보다 제공되는 기능에 집중할 수 있습니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>interface Payment {
+  void pay(int amount);
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class Payment:
+    def pay(self, amount):
+        raise NotImplementedError</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="constructor">
+          <h2>생성자</h2>
+          <p>
+            생성자는 객체가 만들어질 때 초기 상태를 설정하는 특별한 메서드입니다.
+            필수 값이 빠지지 않도록 객체 생성 시점에 받아둘 수 있습니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class User {
+  String name;
+
+  User(String name) {
+    this.name = name;
+  }
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class User:
+    def __init__(self, name):
+        self.name = name</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="this">
+          <h2>this</h2>
+          <p>
+            <code>this</code>는 현재 객체 자신을 가리킵니다. Python에서는 같은 역할을
+            관례적으로 <code>self</code>라는 이름으로 표현합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>this.name = name;
+this.level = level;</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>self.name = name
+self.level = level</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="access">
+          <h2>접근 제어자</h2>
+          <p>
+            접근 제어자는 클래스 내부의 데이터와 기능을 어디까지 공개할지 정합니다.
+            Java는 키워드로 명확히 제어하고, Python은 이름 규칙을 주로 사용합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>public class User {
+  private String password;
+  protected int level;
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class User:
+    def __init__(self):
+        self._level = 1
+        self.__password = "secret"</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="getter-setter">
+          <h2>Getter / Setter</h2>
+          <p>
+            Getter와 Setter는 객체의 값을 읽고 변경하는 통로입니다. 값을 검증하거나
+            내부 표현을 숨기고 싶을 때 유용합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>public String getName() {
+  return name;
+}
+
+public void setName(String name) {
+  this.name = name;
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>@property
+def name(self):
+    return self._name
+
+@name.setter
+def name(self, value):
+    self._name = value</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="overloading">
+          <h2>오버로딩</h2>
+          <p>
+            오버로딩은 같은 이름의 메서드를 매개변수에 따라 다르게 정의하는 것입니다.
+            Java는 문법으로 지원하고, Python은 기본값이나 가변 인자로 비슷하게 표현합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>int add(int a, int b) {
+  return a + b;
+}
+
+int add(int a, int b, int c) {
+  return a + b + c;
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>def add(*numbers):
+    return sum(numbers)</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="overriding">
+          <h2>오버라이딩</h2>
+          <p>
+            오버라이딩은 부모 클래스의 메서드를 자식 클래스에서 다시 정의하는 것입니다.
+            다형성을 가능하게 만드는 대표적인 기법입니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class CardPayment extends Payment {
+  @Override
+  void pay(int amount) {
+    System.out.println("card");
+  }
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class CardPayment(Payment):
+    def pay(self, amount):
+        print("card")</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="abstract-class">
+          <h2>추상 클래스</h2>
+          <p>
+            추상 클래스는 공통 구현을 일부 제공하면서, 자식 클래스가 반드시 구현해야 할
+            메서드를 정할 때 사용합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>abstract class Report {
+  abstract String title();
+
+  void print() {
+    System.out.println(title());
+  }
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>from abc import ABC, abstractmethod
+
+class Report(ABC):
+    @abstractmethod
+    def title(self):
+        pass</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="interface">
+          <h2>인터페이스</h2>
+          <p>
+            인터페이스는 객체가 반드시 제공해야 하는 메서드의 약속입니다. 구현보다
+            역할을 먼저 정의할 때 사용합니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>interface Notifier {
+  void send(String message);
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>from typing import Protocol
+
+class Notifier(Protocol):
+    def send(self, message: str) -> None:
+        ...</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="association">
+          <h2>연관 관계</h2>
+          <p>
+            연관 관계는 한 객체가 다른 객체를 알고 사용하는 관계입니다. 두 객체의
+            생명주기가 강하게 묶이지는 않습니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class OrderService {
+  void create(User user) {
+    System.out.println(user.name);
+  }
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class OrderService:
+    def create(self, user):
+        print(user.name)</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="aggregation">
+          <h2>집합 관계</h2>
+          <p>
+            집합 관계는 전체가 부분을 가지고 있지만, 부분 객체가 전체와 독립적으로
+            존재할 수 있는 관계입니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class Team {
+  List&lt;User&gt; members;
+
+  Team(List&lt;User&gt; members) {
+    this.members = members;
+  }
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class Team:
+    def __init__(self, members):
+        self.members = members</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="composition">
+          <h2>합성 관계</h2>
+          <p>
+            합성 관계는 전체 객체가 부분 객체를 직접 만들고 소유하는 강한 관계입니다.
+            전체가 사라지면 부분도 함께 사라지는 구조로 이해할 수 있습니다.
+          </p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class Page {
+  private Header header;
+
+  Page() {
+    this.header = new Header();
+  }
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class Page:
+    def __init__(self):
+        self.header = Header()</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="solid">
+          <h2>SOLID 원칙</h2>
+          <p>
+            SOLID는 객체지향 설계를 유지보수하기 쉽게 만드는 다섯 가지 원칙입니다.
+            역할 분리, 확장성, 대체 가능성, 작은 인터페이스, 의존성 역전을 강조합니다.
+          </p>
+          <div class="principle-grid">
+            <article>
+              <h3>SRP</h3>
+              <p>클래스는 하나의 책임에 집중합니다.</p>
+            </article>
+            <article>
+              <h3>OCP</h3>
+              <p>확장에는 열려 있고 수정에는 닫혀 있어야 합니다.</p>
+            </article>
+            <article>
+              <h3>LSP</h3>
+              <p>자식 클래스는 부모 타입을 대체할 수 있어야 합니다.</p>
+            </article>
+            <article>
+              <h3>ISP / DIP</h3>
+              <p>작은 인터페이스와 추상화에 의존하는 설계를 지향합니다.</p>
+            </article>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Java</h3>
+              <pre><code>class OrderService {
+  private Notifier notifier;
+
+  OrderService(Notifier notifier) {
+    this.notifier = notifier;
+  }
+}</code></pre>
+            </div>
+            <div class="compare-card">
+              <h3>Python</h3>
+              <pre><code>class OrderService:
+    def __init__(self, notifier):
+        self.notifier = notifier</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="pros">
+          <h2>객체지향의 장점</h2>
+          <p>
+            객체지향은 복잡한 코드를 역할 단위로 나누고, 재사용 가능한 구조를 만들기
+            좋습니다. 변경이 필요한 부분을 특정 객체나 클래스에 모을 수 있어 유지보수에
+            유리합니다.
+          </p>
+          <div class="principle-grid">
+            <article>
+              <h3>재사용성</h3>
+              <p>상속, 조합, 인터페이스로 이미 만든 코드를 다시 활용할 수 있습니다.</p>
+            </article>
+            <article>
+              <h3>유지보수성</h3>
+              <p>책임이 분리되면 변경 영향 범위를 파악하기 쉬워집니다.</p>
+            </article>
+            <article>
+              <h3>확장성</h3>
+              <p>새 기능을 별도 클래스로 추가하기 좋은 구조를 만들 수 있습니다.</p>
+            </article>
+            <article>
+              <h3>모델링</h3>
+              <p>현실의 개념을 코드 구조로 옮기기 쉽습니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="doc-section" id="cons">
+          <h2>객체지향의 단점</h2>
+          <p>
+            객체지향은 잘못 설계하면 클래스가 너무 많아지고 관계가 복잡해질 수 있습니다.
+            작은 문제에 과한 추상화를 적용하면 오히려 이해하기 어려운 코드가 됩니다.
+          </p>
+          <div class="principle-grid">
+            <article>
+              <h3>설계 비용</h3>
+              <p>역할과 책임을 잘 나누기 위해 초기에 고민이 필요합니다.</p>
+            </article>
+            <article>
+              <h3>복잡도 증가</h3>
+              <p>상속 계층이 깊어지면 흐름을 추적하기 어려워질 수 있습니다.</p>
+            </article>
+            <article>
+              <h3>과한 추상화</h3>
+              <p>필요 이상으로 인터페이스와 클래스를 만들면 생산성이 떨어집니다.</p>
+            </article>
+            <article>
+              <h3>성능 부담</h3>
+              <p>상황에 따라 객체 생성과 동적 dispatch가 비용이 될 수 있습니다.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <aside class="article-nav">
+        <h3>이 문서</h3>
+        <ul>
+          <li><a href="#what-is-oop">OOP란?</a></li>
+          <li><a href="#object">객체</a></li>
+          <li><a href="#class">클래스</a></li>
+          <li><a href="#instance">인스턴스</a></li>
+          <li><a href="#attribute">속성</a></li>
+          <li><a href="#method">메서드</a></li>
+          <li><a href="#encapsulation">캡슐화</a></li>
+          <li><a href="#inheritance">상속</a></li>
+          <li><a href="#polymorphism">다형성</a></li>
+          <li><a href="#abstraction">추상화</a></li>
+          <li><a href="#constructor">생성자</a></li>
+          <li><a href="#this">this</a></li>
+          <li><a href="#access">접근 제어자</a></li>
+          <li><a href="#getter-setter">Getter / Setter</a></li>
+          <li><a href="#overloading">오버로딩</a></li>
+          <li><a href="#overriding">오버라이딩</a></li>
+          <li><a href="#abstract-class">추상 클래스</a></li>
+          <li><a href="#interface">인터페이스</a></li>
+          <li><a href="#association">연관 관계</a></li>
+          <li><a href="#aggregation">집합 관계</a></li>
+          <li><a href="#composition">합성 관계</a></li>
+          <li><a href="#solid">SOLID 원칙</a></li>
+          <li><a href="#pros">장점</a></li>
+          <li><a href="#cons">단점</a></li>
+        </ul>
+      </aside>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

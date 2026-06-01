@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Java Python 변환기 - OOP Docs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="home.html">OOP Docs</a>
+
+      <nav class="top-nav" aria-label="주요 메뉴">
+        <a href="home.html">Home</a>
+        <a href="OOP.html">OOP</a>
+        <a href="Java.html">Java</a>
+        <a href="Python.html">Python</a>
+        <a class="active" href="compare.html">Compare</a>
+      </nav>
+
+      <div class="header-tools">
+        <form class="header-search" data-search-form role="search">
+          <input type="search" list="search-options" placeholder="문서 검색..." aria-label="문서 검색" />
+        </form>
+        <label class="theme-toggle" aria-label="다크모드 전환">
+          <input class="theme-check" type="checkbox" />
+          <span>◐</span>
+        </label>
+      </div>
+    </header>
+
+    <datalist id="search-options">
+      <option value="OOP란?"></option>
+      <option value="객체"></option>
+      <option value="클래스"></option>
+      <option value="상속"></option>
+      <option value="다형성"></option>
+      <option value="Java 생성자"></option>
+      <option value="Java ArrayList"></option>
+      <option value="Python 리스트"></option>
+      <option value="Python 클래스"></option>
+      <option value="코드 문법 비교"></option>
+    </datalist>
+
+    <main class="translator-shell">
+      <section class="translator-hero">
+        <span class="doc-label">Compare / Java and Python</span>
+        <h1>Java ↔ Python 코드 변환기</h1>
+        <div class="official-links">
+          <a href="https://docs.oracle.com/en/java/" target="_blank" rel="noreferrer">Java 공식 문서</a>
+          <a href="https://docs.python.org/3/" target="_blank" rel="noreferrer">Python 공식 문서</a>
+        </div>
+        <p>
+          구글 번역기처럼 한쪽에 코드를 입력하면 다른 언어의 비슷한 OOP 문법으로
+          변환해 보여줍니다. 클래스, 생성자, 상속, 출력문 같은 기본 패턴을 빠르게
+          비교할 수 있습니다.
+        </p>
+      </section>
+
+      <section class="translator-card" aria-label="Java Python 코드 변환기">
+        <div class="translator-toolbar">
+          <div class="language-tabs" role="tablist" aria-label="변환 방향">
+            <button class="active" type="button" data-direction="java-to-python">Java → Python</button>
+            <button type="button" data-direction="python-to-java">Python → Java</button>
+          </div>
+
+          <div class="translator-actions">
+            <button class="ghost-btn" type="button" id="swapBtn">방향 전환</button>
+            <button class="ghost-btn" type="button" id="sampleBtn">샘플 코드</button>
+            <button class="primary-btn" type="button" id="convertBtn">변환</button>
+          </div>
+        </div>
+
+        <div class="translator-grid">
+          <article class="translator-pane">
+            <div class="pane-header">
+              <strong id="sourceLabel">Java</strong>
+              <button type="button" class="mini-btn" id="clearBtn">지우기</button>
+            </div>
+            <textarea id="sourceCode" spellcheck="false" aria-label="변환할 코드"></textarea>
+          </article>
+
+          <button class="swap-circle" type="button" id="centerSwapBtn" aria-label="변환 방향 전환">⇄</button>
+
+          <article class="translator-pane">
+            <div class="pane-header">
+              <strong id="targetLabel">Python</strong>
+              <button type="button" class="mini-btn" id="copyBtn">복사</button>
+            </div>
+            <textarea id="targetCode" spellcheck="false" aria-label="변환 결과" readonly></textarea>
+          </article>
+        </div>
+
+        <p class="translator-note">
+          현재 변환기는 학습용 규칙 기반 도구입니다. 복잡한 프로젝트 전체보다 짧은 문법
+          예제와 OOP 구조 비교에 적합합니다.
+        </p>
+      </section>
+
+      <section class="doc-section translator-guide">
+        <h2>지원하는 변환 패턴</h2>
+        <div class="principle-grid">
+          <article>
+            <h3>클래스와 상속</h3>
+            <p><code>class Dog extends Animal</code>과 <code>class Dog(Animal)</code> 형태를 비교합니다.</p>
+          </article>
+          <article>
+            <h3>생성자</h3>
+            <p>Java 생성자와 Python <code>__init__</code> 구조를 서로 대응시킵니다.</p>
+          </article>
+          <article>
+            <h3>출력문</h3>
+            <p><code>System.out.println</code>과 <code>print</code>를 변환합니다.</p>
+          </article>
+          <article>
+            <h3>기본 문법</h3>
+            <p>세미콜론, 중괄호, <code>this</code>, <code>self</code> 같은 차이를 정리합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="doc-section syntax-compare" id="syntax-compare" aria-label="코드 문법 비교">
+        <span class="doc-label">Syntax Compare</span>
+        <h2>코드 문법 비교</h2>
+
+        <h3>클래스</h3>
+        <div class="compare-grid syntax-row">
+          <div class="compare-card">
+            <h3>Java</h3>
+            <pre><code>class User {
+  String name;
+  int level;
+}</code></pre>
+          </div>
+          <div class="compare-card">
+            <h3>Python</h3>
+            <pre><code>class User:
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level</code></pre>
+          </div>
+        </div>
+
+        <h3>생성자</h3>
+        <div class="compare-grid syntax-row">
+          <div class="compare-card">
+            <h3>Java</h3>
+            <pre><code>class User {
+  User(String name) {
+    this.name = name;
+  }
+}</code></pre>
+          </div>
+          <div class="compare-card">
+            <h3>Python</h3>
+            <pre><code>class User:
+    def __init__(self, name):
+        self.name = name</code></pre>
+          </div>
+        </div>
+
+        <h3>상속</h3>
+        <div class="compare-grid syntax-row">
+          <div class="compare-card">
+            <h3>Java</h3>
+            <pre><code>class Dog extends Animal {
+  void speak() {
+    System.out.println("bark");
+  }
+}</code></pre>
+          </div>
+          <div class="compare-card">
+            <h3>Python</h3>
+            <pre><code>class Dog(Animal):
+    def speak(self):
+        print("bark")</code></pre>
+          </div>
+        </div>
+
+        <h3>예외 처리</h3>
+        <div class="compare-grid syntax-row">
+          <div class="compare-card">
+            <h3>Java</h3>
+            <pre><code>try {
+  int result = 10 / number;
+} catch (ArithmeticException e) {
+  System.out.println("error");
+}</code></pre>
+          </div>
+          <div class="compare-card">
+            <h3>Python</h3>
+            <pre><code>try:
+    result = 10 / number
+except ZeroDivisionError:
+    print("error")</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,959 @@
+/* 사이트 전체에서 함께 쓰는 색상 변수입니다. */
+:root {
+  --bg: #0b1020;
+  --bg-soft: #111827;
+  --panel: #151f32;
+  --panel-strong: #1b2940;
+  --line: #2d3d58;
+  --text: #eef4ff;
+  --muted: #9fb0c7;
+  --blue: #64a7ff;
+  --mint: #5ee0b8;
+  --yellow: #ffd166;
+  --pink: #f472b6;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* 체크박스가 켜지면 CSS 변수만 바꿔 라이트 모드로 전환합니다. */
+body:has(.theme-check:checked) {
+  --bg: #f4f7fb;
+  --bg-soft: #ffffff;
+  --panel: #ffffff;
+  --panel-strong: #e9f1fb;
+  --line: #c7d4e5;
+  --text: #132033;
+  --muted: #53657d;
+  --shadow: 0 20px 50px rgba(28, 45, 74, 0.12);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(100, 167, 255, 0.2), transparent 28rem),
+    radial-gradient(circle at 88% 8%, rgba(94, 224, 184, 0.18), transparent 24rem),
+    var(--bg);
+}
+
+* {
+  /* padding과 border를 width 계산 안에 포함해 레이아웃 계산을 쉽게 만듭니다. */
+  box-sizing: border-box;
+}
+
+html {
+  /* 목차 링크를 눌렀을 때 순간 이동이 아니라 부드럽게 스크롤됩니다. */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* 사이트 전체 기본 여백을 없애고, 최소 높이를 화면 전체로 맞춥니다. */
+  margin: 0;
+  min-height: 100vh;
+  /* 어두운 배경 위에 은은한 색 번짐을 넣어 문서 사이트가 너무 밋밋하지 않게 합니다. */
+  background:
+    radial-gradient(circle at 18% 12%, rgba(100, 167, 255, 0.14), transparent 28rem),
+    radial-gradient(circle at 88% 8%, rgba(94, 224, 184, 0.12), transparent 24rem),
+    var(--bg);
+  color: var(--text);
+  font-family:
+    Inter, "Pretendard", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+}
+
+a {
+  /* 링크가 부모 글자색을 그대로 쓰게 해서 메뉴/카드마다 색을 따로 제어할 수 있습니다. */
+  color: inherit;
+}
+
+code,
+pre {
+  /* 코드 영역은 일반 글꼴보다 고정폭 글꼴이 읽기 좋습니다. */
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+}
+
+/* 모든 페이지 상단에 고정되는 헤더입니다. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+  padding: 0 38px;
+  border-bottom: 1px solid rgba(159, 176, 199, 0.2);
+  background: rgba(8, 13, 27, 0.82);
+  backdrop-filter: blur(18px);
+}
+
+/* 라이트 모드에서는 헤더도 밝은 반투명 배경으로 바꿉니다. */
+body:has(.theme-check:checked) .site-header {
+  background: rgba(255, 255, 255, 0.84);
+}
+
+/* 왼쪽 사이트 로고 텍스트입니다. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
+/* 로고 앞의 작은 원형 장식입니다. */
+.logo::before {
+  width: 12px;
+  height: 12px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--mint));
+  content: "";
+  box-shadow: 0 0 24px rgba(100, 167, 255, 0.7);
+}
+
+/* 상단 메뉴 링크들을 가로로 배치합니다. */
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 메뉴 링크의 기본 모양입니다. */
+.top-nav a {
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+/* 현재 페이지(active)와 hover 상태를 같은 스타일로 보여줍니다. */
+.top-nav a:hover,
+.top-nav a.active {
+  background: rgba(100, 167, 255, 0.13);
+  color: var(--text);
+}
+
+/* 헤더 오른쪽의 검색창과 다크모드 버튼 묶음입니다. */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 검색창은 datalist와 함께 사용됩니다. */
+.header-search {
+  position: relative;
+}
+
+/* 헤더 검색 input의 크기와 색입니다. */
+.header-search input {
+  width: 210px;
+  height: 40px;
+  border: 1px solid rgba(159, 176, 199, 0.24);
+  border-radius: 8px;
+  outline: 0;
+  padding: 0 12px;
+  background: rgba(21, 31, 50, 0.74);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+
+/* 라이트 모드에서 검색창 배경만 밝게 바꿉니다. */
+body:has(.theme-check:checked) .header-search input {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* 다크/라이트 모드 전환 버튼입니다. 실제 기능은 안쪽 checkbox가 담당합니다. */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(159, 176, 199, 0.24);
+  border-radius: 8px;
+  background: rgba(21, 31, 50, 0.74);
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* checkbox 자체는 숨기고 label 전체를 버튼처럼 사용합니다. */
+.theme-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 라이트 모드에서 토글 버튼 배경을 밝게 합니다. */
+body:has(.theme-check:checked) .theme-toggle {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* 홈 화면 전체 폭과 위아래 여백입니다. */
+.home-shell {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 74px 0 64px;
+}
+
+/* 홈의 첫 화면: 왼쪽 설명, 오른쪽 코드 미리보기 2단 구조입니다. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  align-items: center;
+  gap: 48px;
+  min-height: calc(100vh - 220px);
+}
+
+/* 홈 메인 제목입니다. clamp로 화면 크기에 맞게 자연스럽게 줄어듭니다. */
+.hero-copy h1 {
+  margin: 14px 0 18px;
+  max-width: 760px;
+  font-size: clamp(40px, 6vw, 76px);
+  line-height: 1.04;
+}
+
+/* 홈 설명 문장입니다. */
+.hero-copy p {
+  max-width: 640px;
+  margin: 0 0 32px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+/* 작은 라벨 텍스트들을 공통 스타일로 묶었습니다. */
+.eyebrow,
+.doc-label,
+.card-kicker {
+  color: var(--mint);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 홈 중앙의 큰 검색창입니다. */
+.search-box {
+  display: flex;
+  width: min(100%, 660px);
+  min-height: 60px;
+  padding: 6px;
+  border: 1px solid rgba(159, 176, 199, 0.28);
+  border-radius: 8px;
+  background: rgba(21, 31, 50, 0.78);
+  box-shadow: var(--shadow);
+}
+
+/* 검색창 입력 부분은 남은 공간을 모두 차지합니다. */
+.search-box input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  padding: 0 18px;
+  background: transparent;
+  color: var(--text);
+  font-size: 17px;
+}
+
+/* 검색어 placeholder 색입니다. */
+.search-box input::placeholder {
+  color: #7f90aa;
+}
+
+/* 홈 검색 버튼입니다. */
+.search-box button {
+  border: 0;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--blue), var(--mint));
+  color: #06101f;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+/* 버튼 크기와 아이콘 글자 크기입니다. */
+.search-box button {
+  width: 54px;
+  font-size: 26px;
+}
+
+/* 카드, 코드 박스, 비교 박스가 공유하는 기본 패널 스타일입니다. */
+.hero-visual,
+.code-box,
+.compare-card,
+.feature-card,
+.principle-grid article {
+  border: 1px solid rgba(159, 176, 199, 0.2);
+  border-radius: 8px;
+  background: rgba(21, 31, 50, 0.78);
+  box-shadow: var(--shadow);
+}
+
+/* 라이트 모드에서 패널 배경을 밝게 바꿉니다. */
+body:has(.theme-check:checked) .hero-visual,
+body:has(.theme-check:checked) .code-box,
+body:has(.theme-check:checked) .compare-card,
+body:has(.theme-check:checked) .feature-card,
+body:has(.theme-check:checked) .principle-grid article,
+body:has(.theme-check:checked) .translator-card {
+  background: rgba(255, 255, 255, 0.86);
+}
+
+/* 홈 오른쪽 코드 미리보기 박스입니다. */
+.hero-visual {
+  overflow: hidden;
+}
+
+/* 코드 창 상단의 막대 영역입니다. */
+.window-bar {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(159, 176, 199, 0.16);
+}
+
+/* 코드 창 위쪽의 작은 원 버튼들입니다. */
+.window-bar span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--pink);
+}
+
+/* 두 번째 원 버튼 색입니다. */
+.window-bar span:nth-child(2) {
+  background: var(--yellow);
+}
+
+/* 세 번째 원 버튼 색입니다. */
+.window-bar span:nth-child(3) {
+  background: var(--mint);
+}
+
+/* 모든 코드 표시 영역의 기본 글자 스타일입니다. */
+.hero-visual pre,
+.code-box pre,
+.compare-card pre {
+  margin: 0;
+  overflow-x: auto;
+  color: #dbeafe;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* 라이트 모드에서 코드 글자색을 어두운 색으로 바꿉니다. */
+body:has(.theme-check:checked) .hero-visual pre,
+body:has(.theme-check:checked) .code-box pre,
+body:has(.theme-check:checked) .compare-card pre,
+body:has(.theme-check:checked) .translator-pane textarea {
+  color: #18324f;
+}
+
+/* 홈 코드 미리보기 안쪽 여백입니다. */
+.hero-visual pre {
+  padding: 28px;
+}
+
+/* 홈의 빠른 이동 카드 4개를 가로 grid로 배치합니다. */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* 홈 빠른 이동 카드입니다. */
+.feature-card {
+  min-height: 190px;
+  padding: 24px;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+/* 카드에 마우스를 올렸을 때 살짝 떠오르는 효과입니다. */
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(100, 167, 255, 0.58);
+  background: rgba(27, 41, 64, 0.95);
+}
+
+/* 카드 제목입니다. */
+.feature-card h2 {
+  margin: 18px 0 10px;
+  font-size: 24px;
+}
+
+/* 카드 설명과 원칙 카드 설명의 공통 스타일입니다. */
+.feature-card p,
+.principle-grid p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* 문서 페이지의 3단 레이아웃: 왼쪽 목차 / 본문 / 오른쪽 목차입니다. */
+.docs-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr) 230px;
+  min-height: calc(100vh - 68px);
+}
+
+/* 좌우 목차는 화면에 붙어 따라오도록 sticky로 처리했습니다. */
+.sidebar,
+.article-nav {
+  position: sticky;
+  top: 68px;
+  height: calc(100vh - 68px);
+  overflow-y: auto;
+  padding: 30px 24px;
+  border-color: rgba(159, 176, 199, 0.18);
+  background: rgba(10, 16, 31, 0.5);
+}
+
+/* 왼쪽 목차의 오른쪽 선입니다. */
+.sidebar {
+  border-right: 1px solid rgba(159, 176, 199, 0.18);
+}
+
+/* 오른쪽 목차의 왼쪽 선입니다. */
+.article-nav {
+  border-left: 1px solid rgba(159, 176, 199, 0.18);
+}
+
+/* 목차 제목입니다. */
+.sidebar h3,
+.article-nav h3 {
+  margin: 0 0 18px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* 목차 목록 기본 스타일을 제거하고 간격을 grid로 관리합니다. */
+.sidebar ul,
+.article-nav ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 목차 링크입니다. */
+.sidebar a,
+.article-nav a {
+  display: block;
+  padding: 9px 10px;
+  border-radius: 7px;
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* 목차 링크 hover 효과입니다. */
+.sidebar a:hover,
+.article-nav a:hover {
+  background: rgba(100, 167, 255, 0.12);
+  color: var(--text);
+}
+
+/* 문서 본문 영역입니다. */
+.content {
+  width: min(860px, 100%);
+  padding: 62px 52px 80px;
+}
+
+/* 문서 최상단 제목입니다. */
+.content h1 {
+  margin: 14px 0 20px;
+  color: var(--text);
+  font-size: clamp(42px, 5vw, 64px);
+  line-height: 1.1;
+}
+
+/* 문서 섹션 제목입니다. */
+.content h2 {
+  margin: 0 0 14px;
+  font-size: 28px;
+}
+
+/* 작은 제목입니다. */
+.content h3 {
+  margin: 0 0 10px;
+}
+
+/* 문서 본문 문단입니다. */
+.content p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+/* 문장 중간의 inline code 색입니다. */
+.content code {
+  color: #a7f3d0;
+}
+
+/* 라이트 모드에서 inline code 색을 조정합니다. */
+body:has(.theme-check:checked) .content code {
+  color: #0f766e;
+}
+
+/* 공식문서로 이동하는 링크 버튼 묶음입니다. */
+.official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 24px;
+}
+
+/* 공식문서 링크 버튼입니다. */
+.official-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgba(94, 224, 184, 0.28);
+  border-radius: 8px;
+  background: rgba(94, 224, 184, 0.1);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* 외부 링크임을 표시하는 화살표입니다. */
+.official-links a::after {
+  margin-left: 7px;
+  content: "↗";
+}
+
+/* 문서 섹션 사이 간격입니다. */
+.doc-section {
+  margin-top: 42px;
+}
+
+/* SOLID, 장단점처럼 짧은 설명 카드들을 2열로 배치합니다. */
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* 원칙 카드 내부 여백입니다. */
+.principle-grid article {
+  padding: 20px;
+  box-shadow: none;
+}
+
+/* 코드 예시 박스입니다. 복사 버튼 위치 기준이 되도록 relative를 둡니다. */
+.code-box {
+  position: relative;
+  margin-top: 18px;
+  overflow: hidden;
+  background: #07101f;
+}
+
+/* 코드 예시 내부 여백입니다. */
+.code-box pre {
+  padding: 22px;
+}
+
+/* Java/Python 비교 카드를 2열로 배치합니다. */
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Compare 페이지 문법 비교 예제 사이 간격입니다. */
+.syntax-row {
+  margin: 12px 0 28px;
+}
+
+/* 비교 카드입니다. 복사 버튼을 오른쪽 위에 올리기 위해 relative를 둡니다. */
+.compare-card {
+  position: relative;
+  padding: 22px;
+  background: #07101f;
+}
+
+/* JS가 코드 박스마다 자동으로 붙이는 복사 버튼입니다. */
+.copy-code-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: 1px solid rgba(159, 176, 199, 0.22);
+  border-radius: 7px;
+  padding: 7px 10px;
+  background: rgba(7, 16, 31, 0.86);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* 라이트 모드에서 복사 버튼 배경을 밝게 합니다. */
+body:has(.theme-check:checked) .copy-code-btn {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 비교 표 기본 스타일입니다. */
+.compare-table {
+  width: 100%;
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(159, 176, 199, 0.2);
+  border-collapse: collapse;
+  border-radius: 8px;
+}
+
+/* 비교 표 셀 스타일입니다. */
+.compare-table th,
+.compare-table td {
+  padding: 16px;
+  border: 1px solid rgba(159, 176, 199, 0.16);
+  text-align: left;
+}
+
+/* 비교 표 헤더입니다. */
+.compare-table th {
+  background: rgba(100, 167, 255, 0.12);
+  color: var(--text);
+}
+
+/* 비교 표 내용 셀입니다. */
+.compare-table td {
+  color: var(--muted);
+}
+
+/* Compare 페이지 전체 폭과 여백입니다. */
+.translator-shell {
+  width: min(1240px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 56px 0 76px;
+}
+
+/* Compare 페이지 소개 영역입니다. */
+.translator-hero {
+  max-width: 820px;
+  margin-bottom: 30px;
+}
+
+/* Compare 페이지 제목입니다. */
+.translator-hero h1 {
+  margin: 14px 0 16px;
+  font-size: clamp(40px, 6vw, 68px);
+  line-height: 1.08;
+}
+
+/* Compare 페이지 설명 문장과 안내 문구입니다. */
+.translator-hero p,
+.translator-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* 코드 변환기 전체 박스입니다. */
+.translator-card {
+  border: 1px solid rgba(159, 176, 199, 0.2);
+  border-radius: 8px;
+  background: rgba(21, 31, 50, 0.78);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* 변환기 상단 버튼 영역입니다. */
+.translator-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(159, 176, 199, 0.16);
+}
+
+/* Java→Python / Python→Java 방향 선택 버튼 묶음입니다. */
+.language-tabs {
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid rgba(159, 176, 199, 0.18);
+  border-radius: 8px;
+  background: rgba(7, 16, 31, 0.74);
+}
+
+/* 변환기 버튼들의 공통 스타일입니다. */
+.language-tabs button,
+.ghost-btn,
+.primary-btn,
+.mini-btn {
+  border: 0;
+  border-radius: 7px;
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* 방향 선택 버튼 기본 상태입니다. */
+.language-tabs button {
+  padding: 10px 14px;
+  background: transparent;
+  color: var(--muted);
+}
+
+/* 현재 선택된 변환 방향 버튼입니다. */
+.language-tabs button.active {
+  background: rgba(100, 167, 255, 0.16);
+  color: var(--text);
+}
+
+/* 변환, 샘플, 방향 전환 버튼 묶음입니다. */
+.translator-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* 보조 버튼과 주요 버튼의 기본 크기입니다. */
+.ghost-btn,
+.primary-btn {
+  padding: 10px 14px;
+}
+
+/* 보조 버튼입니다. */
+.ghost-btn {
+  border: 1px solid rgba(159, 176, 199, 0.22);
+  background: rgba(7, 16, 31, 0.72);
+}
+
+/* 가장 중요한 동작인 변환 버튼입니다. */
+.primary-btn {
+  background: linear-gradient(135deg, var(--blue), var(--mint));
+  color: #06101f;
+}
+
+/* 변환기의 양쪽 코드 입력/출력 칸을 2열로 배치합니다. */
+.translator-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* 코드 입력/출력 칸입니다. */
+.translator-pane {
+  min-width: 0;
+  background: rgba(7, 16, 31, 0.55);
+}
+
+/* 오른쪽 칸과 왼쪽 칸 사이 구분선입니다. */
+.translator-pane + .translator-pane {
+  border-left: 1px solid rgba(159, 176, 199, 0.16);
+}
+
+/* 각 코드 칸의 상단 라벨 영역입니다. */
+.pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 54px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(159, 176, 199, 0.14);
+}
+
+/* Java/Python 라벨 글자입니다. */
+.pane-header strong {
+  font-size: 16px;
+}
+
+/* 지우기/복사 같은 작은 버튼입니다. */
+.mini-btn {
+  padding: 7px 10px;
+  background: rgba(100, 167, 255, 0.12);
+  color: var(--muted);
+}
+
+/* 실제 코드를 입력하고 결과를 보는 textarea입니다. */
+.translator-pane textarea {
+  display: block;
+  width: 100%;
+  min-height: 420px;
+  resize: vertical;
+  border: 0;
+  outline: 0;
+  padding: 22px;
+  background: transparent;
+  color: #dbeafe;
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* textarea placeholder 색입니다. */
+.translator-pane textarea::placeholder {
+  color: #74849c;
+}
+
+/* 가운데 방향 전환 버튼입니다. */
+.swap-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(159, 176, 199, 0.24);
+  border-radius: 50%;
+  background: #0b1020;
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+}
+
+/* 변환기 하단 안내 문장입니다. */
+.translator-note {
+  padding: 16px;
+  border-top: 1px solid rgba(159, 176, 199, 0.16);
+  font-size: 14px;
+}
+
+/* 지원 패턴 설명 영역의 위쪽 간격입니다. */
+.translator-guide {
+  margin-top: 34px;
+}
+
+/* 라이트 모드에서 변환기 코드 칸 배경을 밝게 합니다. */
+body:has(.theme-check:checked) .translator-pane {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+/* 태블릿 이하 화면에서 레이아웃을 한 줄 구조로 바꿉니다. */
+@media (max-width: 980px) {
+  /* 헤더 요소들이 세로로 쌓이게 합니다. */
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 20px;
+  }
+
+  /* 모바일에서 메뉴가 넘치면 가로 스크롤됩니다. */
+  .top-nav {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  /* 검색창은 작은 화면에서 가로 전체를 씁니다. */
+  .header-tools,
+  .header-search,
+  .header-search input {
+    width: 100%;
+  }
+
+  /* 2열/4열 grid를 작은 화면에서는 1열로 바꿉니다. */
+  .hero,
+  .quick-grid,
+  .compare-grid,
+  .principle-grid,
+  .translator-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 변환기 버튼 영역도 세로로 쌓습니다. */
+  .translator-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  /* 변환기 버튼 묶음은 가로 전체를 차지합니다. */
+  .translator-actions,
+  .language-tabs {
+    width: 100%;
+  }
+
+  /* 버튼들이 같은 너비로 나뉘게 합니다. */
+  .language-tabs button,
+  .translator-actions button {
+    flex: 1;
+  }
+
+  /* 변환기 오른쪽 칸이 아래로 내려오므로 구분선을 위쪽으로 바꿉니다. */
+  .translator-pane + .translator-pane {
+    border-top: 1px solid rgba(159, 176, 199, 0.16);
+    border-left: 0;
+  }
+
+  /* 세로 배치에서는 방향 전환 아이콘을 회전시켜 자연스럽게 보이게 합니다. */
+  .swap-circle {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  /* 문서 페이지 3단 레이아웃을 모바일에서는 단일 흐름으로 바꿉니다. */
+  .docs-layout {
+    display: block;
+  }
+
+  /* sticky 목차를 일반 블록으로 바꿉니다. */
+  .sidebar,
+  .article-nav {
+    position: static;
+    height: auto;
+    border: 0;
+    border-bottom: 1px solid rgba(159, 176, 199, 0.18);
+  }
+
+  /* 오른쪽 목차는 모바일에서 공간을 많이 차지하므로 숨깁니다. */
+  .article-nav {
+    display: none;
+  }
+
+  /* 본문 좌우 여백을 줄입니다. */
+  .content {
+    padding: 44px 24px 64px;
+  }
+}
+
+/* 아주 작은 모바일 화면 전용 조정입니다. */
+@media (max-width: 640px) {
+  /* 홈 전체 폭을 조금 더 넓게 씁니다. */
+  .home-shell {
+    width: min(100% - 28px, 1180px);
+    padding-top: 44px;
+  }
+
+  /* 홈 hero의 높이 고정을 풀어 내용만큼 자연스럽게 늘어납니다. */
+  .hero {
+    min-height: auto;
+    gap: 28px;
+  }
+
+  /* 작은 화면에서 제목 크기를 고정해 너무 커지지 않게 합니다. */
+  .hero-copy h1 {
+    font-size: 40px;
+  }
+
+  /* 검색창 높이를 살짝 줄입니다. */
+  .search-box {
+    min-height: 56px;
+  }
+
+  /* 상단 메뉴 글자와 패딩을 줄입니다. */
+  .top-nav a {
+    padding: 9px 11px;
+    font-size: 14px;
+  }
+}

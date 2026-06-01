@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OOP Docs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="home.html">OOP Docs</a>
+
+      <nav class="top-nav" aria-label="주요 메뉴">
+        <a class="active" href="home.html">Home</a>
+        <a href="OOP.html">OOP</a>
+        <a href="Java.html">Java</a>
+        <a href="Python.html">Python</a>
+        <a href="compare.html">Compare</a>
+      </nav>
+
+      <div class="header-tools">
+        <form class="header-search" data-search-form role="search">
+          <input type="search" list="search-options" placeholder="문서 검색..." aria-label="문서 검색" />
+        </form>
+        <label class="theme-toggle" aria-label="다크모드 전환">
+          <input class="theme-check" type="checkbox" />
+          <span>◐</span>
+        </label>
+      </div>
+    </header>
+
+    <datalist id="search-options">
+      <option value="OOP란?"></option>
+      <option value="객체"></option>
+      <option value="클래스"></option>
+      <option value="상속"></option>
+      <option value="다형성"></option>
+      <option value="Java 생성자"></option>
+      <option value="Java ArrayList"></option>
+      <option value="Python 리스트"></option>
+      <option value="Python 클래스"></option>
+      <option value="코드 문법 비교"></option>
+    </datalist>
+
+    <main class="home-shell">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Modern object-oriented programming guide</span>
+          <h1>객체지향 개념을 빠르게 찾고, 언어별 코드로 비교하세요.</h1>
+          <div class="official-links">
+            <a href="https://docs.oracle.com/en/java/" target="_blank" rel="noreferrer">Java 공식 문서</a>
+            <a href="https://docs.python.org/3/" target="_blank" rel="noreferrer">Python 공식 문서</a>
+          </div>
+          <p>
+            클래스, 상속, 캡슐화, 다형성 같은 OOP 핵심 개념을 MDN처럼
+            구조화된 문서와 예제로 정리하는 학습 사이트입니다.
+          </p>
+
+          <form class="search-box" action="#" role="search">
+            <input type="search" placeholder="클래스, 상속, 생성자 검색..." aria-label="문서 검색" />
+            <button type="submit" aria-label="검색">⌕</button>
+          </form>
+        </div>
+
+        <div class="hero-visual" aria-label="OOP 코드 미리보기">
+          <div class="window-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <pre><code>class Character {
+  constructor(name) {
+    this.name = name;
+  }
+
+  move() {
+    return `${this.name} moves`;
+  }
+}</code></pre>
+        </div>
+      </section>
+
+      <section class="quick-grid" aria-label="빠른 시작">
+        <a class="feature-card" href="OOP.html">
+          <span class="card-kicker">Concept</span>
+          <h2>OOP 기초</h2>
+          <p>객체, 클래스, 인스턴스의 관계를 먼저 잡아봅니다.</p>
+        </a>
+
+        <a class="feature-card" href="Java.html">
+          <span class="card-kicker">Java</span>
+          <h2>Java 문법</h2>
+          <p>상속, 생성자, 인터페이스를 Java 코드로 확인합니다.</p>
+        </a>
+
+        <a class="feature-card" href="Python.html">
+          <span class="card-kicker">Python</span>
+          <h2>Python 문법</h2>
+          <p>파이썬다운 클래스 설계와 메서드 작성법을 살펴봅니다.</p>
+        </a>
+
+        <a class="feature-card" href="compare.html">
+          <span class="card-kicker">Compare</span>
+          <h2>언어 비교</h2>
+          <p>같은 OOP 개념이 Java와 Python에서 어떻게 다른지 비교합니다.</p>
+        </a>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
