@@ -1,3 +1,14 @@
+/* 로그인 버튼을 위한 css 코드입니다. */
+.login {
+  border: 0;
+  width: 80px;
+  height: 40px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--blue), var(--mint));
+  color: #06101f;
+  font-weight: 900;
+  cursor: pointer;
+}
 /* 사이트 전체에서 함께 쓰는 색상 변수입니다. */
 :root {
   --bg: #0b1020;
@@ -25,8 +36,16 @@ body:has(.theme-check:checked) {
   --muted: #53657d;
   --shadow: 0 20px 50px rgba(28, 45, 74, 0.12);
   background:
-    radial-gradient(circle at 18% 12%, rgba(100, 167, 255, 0.2), transparent 28rem),
-    radial-gradient(circle at 88% 8%, rgba(94, 224, 184, 0.18), transparent 24rem),
+    radial-gradient(
+      circle at 18% 12%,
+      rgba(100, 167, 255, 0.2),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(94, 224, 184, 0.18),
+      transparent 24rem
+    ),
     var(--bg);
 }
 
@@ -46,8 +65,16 @@ body {
   min-height: 100vh;
   /* 어두운 배경 위에 은은한 색 번짐을 넣어 문서 사이트가 너무 밋밋하지 않게 합니다. */
   background:
-    radial-gradient(circle at 18% 12%, rgba(100, 167, 255, 0.14), transparent 28rem),
-    radial-gradient(circle at 88% 8%, rgba(94, 224, 184, 0.12), transparent 24rem),
+    radial-gradient(
+      circle at 18% 12%,
+      rgba(100, 167, 255, 0.14),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(94, 224, 184, 0.12),
+      transparent 24rem
+    ),
     var(--bg);
   color: var(--text);
   font-family:
