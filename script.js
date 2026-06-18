@@ -43,12 +43,14 @@ const sampleCode = {
 setupSearch();
 setupCopyButtons();
 setupTranslator();
+setupThemeButton();
+loadTheme();
 
 // 검색창에 입력한 단어가 searchMap에 있으면 해당 위치로 이동합니다.
 function setupSearch() {
   // data-search-form은 상단 검색창, .hero .search-box는 홈 화면 큰 검색창입니다.
-  document.querySelectorAll("[data-search-form], .hero .search-box").forEach((form) => {
-    form.addEventListener("submit", (event) => {
+  document.querySelectorAll("[data-search-form], .hero .search-box").forEach(function (form) {
+    form.addEventListener("submit", function (event) {
       // form은 기본적으로 새로고침을 하므로, JS로 이동 처리하기 위해 막습니다.
       event.preventDefault();
 
@@ -63,7 +65,7 @@ function setupSearch() {
 // 모든 코드 박스에 복사 버튼을 자동으로 붙입니다.
 function setupCopyButtons() {
   // .code-box는 일반 코드 예시, .compare-card는 Java/Python 비교 카드입니다.
-  document.querySelectorAll(".code-box, .compare-card").forEach((box) => {
+  document.querySelectorAll(".code-box, .compare-card").forEach(function (box) {
     const code = box.querySelector("code");
     // 코드가 없는 카드에는 복사 버튼을 만들 필요가 없습니다.
     if (!code) return;
@@ -73,7 +75,9 @@ function setupCopyButtons() {
     button.type = "button";
     button.className = "copy-code-btn";
     button.textContent = "복사";
-    button.addEventListener("click", () => copyText(code.textContent, button));
+    button.addEventListener("click", function () {
+      copyText(code.textContent, button);
+    });
     box.appendChild(button);
   });
 }
@@ -90,7 +94,7 @@ async function copyText(text, button) {
   }
 
   // 1.2초 뒤 버튼 문구를 원래대로 돌립니다.
-  setTimeout(() => {
+  setTimeout(function () {
     button.textContent = "복사";
   }, 1200);
 }
@@ -112,7 +116,7 @@ function setupTranslator() {
     direction = nextDirection;
 
     // 현재 선택된 방향 버튼에만 active 클래스를 붙입니다.
-    document.querySelectorAll("[data-direction]").forEach((button) => {
+    document.querySelectorAll("[data-direction]").forEach(function (button) {
       button.classList.toggle("active", button.dataset.direction === direction);
     });
 
@@ -144,25 +148,60 @@ function setupTranslator() {
   }
 
   // 방향 선택 버튼 2개에 클릭 이벤트를 연결합니다.
-  document.querySelectorAll("[data-direction]").forEach((button) => {
-    button.addEventListener("click", () => changeDirection(button.dataset.direction));
+  document.querySelectorAll("[data-direction]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      changeDirection(button.dataset.direction);
+    });
   });
 
   // 변환기 안의 각 버튼에 기능을 연결합니다.
   document.querySelector("#convertBtn").addEventListener("click", convertCode);
-  document.querySelector("#sampleBtn").addEventListener("click", () => changeDirection(direction));
+  document.querySelector("#sampleBtn").addEventListener("click", function () {
+    changeDirection(direction);
+  });
   document.querySelector("#swapBtn").addEventListener("click", swapDirection);
   document.querySelector("#centerSwapBtn").addEventListener("click", swapDirection);
-  document.querySelector("#clearBtn").addEventListener("click", () => {
+  document.querySelector("#clearBtn").addEventListener("click", function () {
     sourceCode.value = "";
     targetCode.value = "";
   });
-  document.querySelector("#copyBtn").addEventListener("click", (event) => copyText(targetCode.value, event.target));
+  document.querySelector("#copyBtn").addEventListener("click", function (event) {
+    copyText(targetCode.value, event.target);
+  });
   // 사용자가 코드를 입력할 때마다 결과를 바로 갱신합니다.
   sourceCode.addEventListener("input", convertCode);
 
   // 페이지가 처음 열렸을 때 기본 샘플과 변환 결과를 표시합니다.
   changeDirection(direction);
+}
+
+// 다크모드 버튼을 누르면 body에 light-mode 클래스를 붙였다 뺐다 합니다.
+function setupThemeButton() {
+  const themeButton = document.querySelector("#themeToggle");
+  if (!themeButton) return;
+
+  themeButton.addEventListener("click", function () {
+    document.body.classList.toggle("light-mode");
+    saveTheme();
+  });
+}
+
+// 현재 화면 모드를 브라우저에 저장합니다.
+function saveTheme() {
+  if (document.body.classList.contains("light-mode")) {
+    localStorage.setItem("theme", "light");
+  } else {
+    localStorage.setItem("theme", "dark");
+  }
+}
+
+// 다른 페이지로 이동해도 이전에 선택한 화면 모드를 다시 적용합니다.
+function loadTheme() {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light") {
+    document.body.classList.add("light-mode");
+  }
 }
 
 // Java 코드에서 자주 보이는 문법을 Python 형태로 단순 치환합니다.
@@ -184,14 +223,17 @@ function javaToPython(code) {
     .replace(/[{};]/g, "")
     .split("\n")
     // private 필드 선언은 Python 예시에서는 생략합니다.
-    .filter((line) => !line.trim().startsWith("private"))
+    .filter(function (line) {
+      return !line.trim().startsWith("private");
+    })
     .join("\n");
 }
 
 // Python 코드에서 자주 보이는 문법을 Java 형태로 단순 치환합니다.
 function pythonToJava(code) {
   // 생성자 이름을 만들기 위해 Python 코드에서 클래스 이름을 먼저 찾습니다.
-  const className = code.match(/class (\w+)/)?.[1] || "ClassName";
+  const classMatch = code.match(/class (\w+)/);
+  const className = classMatch ? classMatch[1] : "ClassName";
 
   return code
     // Python 상속 문법: class Dog(Animal): -> class Dog extends Animal {
