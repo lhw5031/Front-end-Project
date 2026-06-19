@@ -269,18 +269,30 @@ function showSuggestions() {
 
   list.innerHTML = "";
 
-  suggestions.forEach(function (suggestion) {
+  suggestions.forEach(function (suggestion, index) {
     const item = document.createElement("li");
     item.innerHTML =
+      "<div class=\"suggestion-item-top\">" +
       "<strong>" +
       suggestion.page +
-      "</strong><p>" +
+      "</strong><button class=\"suggestion-delete\" type=\"button\">삭제</button></div><p>" +
       suggestion.text +
       "</p><span>" +
       suggestion.date +
       "</span>";
+    item.querySelector(".suggestion-delete").addEventListener("click", function () {
+      deleteSuggestion(index);
+    });
     list.appendChild(item);
   });
+}
+
+// 선택한 번호의 건의 사항만 삭제합니다.
+function deleteSuggestion(index) {
+  const suggestions = getSuggestions();
+  suggestions.splice(index, 1);
+  localStorage.setItem("suggestions", JSON.stringify(suggestions));
+  showSuggestions();
 }
 
 // Java 코드에서 자주 보이는 문법을 Python 형태로 단순 치환합니다.

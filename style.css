@@ -784,8 +784,36 @@ body.light-mode .suggestion-list li {
 
 .suggestion-list strong {
   display: block;
-  margin-bottom: 8px;
   color: #93c5fd;
+}
+
+.suggestion-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.suggestion-delete {
+  border: 1px solid #34435f;
+  border-radius: 6px;
+  padding: 6px 10px;
+  background: #111827;
+  color: #a9b8cf;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+body.light-mode .suggestion-delete {
+  border-color: #c7d4e5;
+  background: #ffffff;
+  color: #53657d;
+}
+
+.suggestion-delete:hover {
+  border-color: #f87171;
+  color: #fca5a5;
 }
 
 .suggestion-list p {
