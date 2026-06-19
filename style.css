@@ -683,6 +683,132 @@ body.light-mode .translator-note {
   margin-top: 34px;
 }
 
+/* 건의 사항 페이지 */
+.suggestion-shell {
+  width: min(900px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 56px 0 80px;
+}
+
+.suggestion-intro h1 {
+  margin: 14px 0 16px;
+  font-size: 44px;
+}
+
+.suggestion-intro p {
+  color: #a9b8cf;
+  line-height: 1.8;
+}
+
+body.light-mode .suggestion-intro p {
+  color: #53657d;
+}
+
+.suggestion-card,
+.suggestion-list-section {
+  margin-top: 28px;
+  border: 1px solid #2b3a55;
+  border-radius: 6px;
+  background: #111827;
+  padding: 24px;
+}
+
+body.light-mode .suggestion-card,
+body.light-mode .suggestion-list-section {
+  border-color: #c7d4e5;
+  background: #ffffff;
+}
+
+.suggestion-card form {
+  display: grid;
+  gap: 12px;
+}
+
+.suggestion-card label {
+  font-weight: 700;
+}
+
+.suggestion-card select,
+.suggestion-card textarea {
+  width: 100%;
+  border: 1px solid #34435f;
+  border-radius: 7px;
+  padding: 12px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-size: 15px;
+}
+
+body.light-mode .suggestion-card select,
+body.light-mode .suggestion-card textarea {
+  border-color: #c7d4e5;
+  background: #f4f7fb;
+  color: #132033;
+}
+
+.suggestion-submit {
+  width: 120px;
+  height: 42px;
+}
+
+.suggestion-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.suggestion-list-header h2 {
+  margin: 0;
+}
+
+.suggestion-list {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suggestion-list li {
+  border: 1px solid #2b3a55;
+  border-radius: 6px;
+  padding: 14px;
+  background: #0f172a;
+}
+
+body.light-mode .suggestion-list li {
+  border-color: #c7d4e5;
+  background: #f4f7fb;
+}
+
+.suggestion-list strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #93c5fd;
+}
+
+.suggestion-list p {
+  margin: 0 0 8px;
+  color: #e5e7eb;
+  line-height: 1.6;
+}
+
+body.light-mode .suggestion-list p {
+  color: #132033;
+}
+
+.suggestion-list span,
+.empty-suggestion {
+  color: #a9b8cf;
+  font-size: 14px;
+}
+
+body.light-mode .suggestion-list span,
+body.light-mode .empty-suggestion {
+  color: #53657d;
+}
+
 /* 태블릿과 모바일 */
 @media (max-width: 980px) {
   .site-header {

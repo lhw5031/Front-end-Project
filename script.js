@@ -18,6 +18,7 @@ const searchMap = {
   "python 딕셔너리": "Python.html#dictionary",
   compare: "compare.html",
   "코드 문법 비교": "compare.html#syntax-compare",
+  건의: "suggestion.html",
 };
 
 // Compare 페이지에서 버튼을 눌렀을 때 넣어줄 예시 코드입니다.
@@ -45,6 +46,7 @@ setupCopyButtons();
 setupTranslator();
 setupThemeButton();
 loadTheme();
+setupSuggestionForm();
 
 // 검색창에 입력한 단어가 searchMap에 있으면 해당 위치로 이동합니다.
 function setupSearch() {
@@ -202,6 +204,83 @@ function loadTheme() {
   if (savedTheme === "light") {
     document.body.classList.add("light-mode");
   }
+}
+
+// 건의 사항을 저장하고 화면에 다시 보여줍니다.
+function setupSuggestionForm() {
+  const form = document.querySelector("#suggestionForm");
+  const pageSelect = document.querySelector("#suggestionPage");
+  const textBox = document.querySelector("#suggestionText");
+  const list = document.querySelector("#suggestionList");
+  const clearButton = document.querySelector("#clearSuggestions");
+
+  if (!form || !pageSelect || !textBox || !list) return;
+
+  showSuggestions();
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const text = textBox.value.trim();
+    if (text === "") return;
+
+    const suggestion = {
+      page: pageSelect.value,
+      text: text,
+      date: new Date().toLocaleString(),
+    };
+
+    const suggestions = getSuggestions();
+    suggestions.push(suggestion);
+    localStorage.setItem("suggestions", JSON.stringify(suggestions));
+
+    textBox.value = "";
+    showSuggestions();
+  });
+
+  clearButton.addEventListener("click", function () {
+    localStorage.removeItem("suggestions");
+    showSuggestions();
+  });
+}
+
+// 저장된 건의 사항 배열을 가져옵니다.
+function getSuggestions() {
+  const savedSuggestions = localStorage.getItem("suggestions");
+
+  if (savedSuggestions) {
+    return JSON.parse(savedSuggestions);
+  }
+
+  return [];
+}
+
+// 저장된 건의 사항을 목록으로 그립니다.
+function showSuggestions() {
+  const list = document.querySelector("#suggestionList");
+  const suggestions = getSuggestions();
+
+  if (!list) return;
+
+  if (suggestions.length === 0) {
+    list.innerHTML = "<li class=\"empty-suggestion\">아직 등록된 건의가 없습니다.</li>";
+    return;
+  }
+
+  list.innerHTML = "";
+
+  suggestions.forEach(function (suggestion) {
+    const item = document.createElement("li");
+    item.innerHTML =
+      "<strong>" +
+      suggestion.page +
+      "</strong><p>" +
+      suggestion.text +
+      "</p><span>" +
+      suggestion.date +
+      "</span>";
+    list.appendChild(item);
+  });
 }
 
 // Java 코드에서 자주 보이는 문법을 Python 형태로 단순 치환합니다.

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>건의 사항 - OOP Docs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="home.html">OOP Docs</a>
+
+      <nav class="top-nav" aria-label="주요 메뉴">
+        <a href="home.html">Home</a>
+        <a href="OOP.html">OOP</a>
+        <a href="Java.html">Java</a>
+        <a href="Python.html">Python</a>
+        <a href="compare.html">Compare</a>
+        <a class="active" href="suggestion.html">건의</a>
+      </nav>
+
+      <div class="header-tools">
+        <form class="header-search" data-search-form role="search">
+          <input type="search" list="search-options" placeholder="문서 검색..." aria-label="문서 검색" />
+        </form>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크모드 전환">◐</button>
+      </div>
+    </header>
+
+    <datalist id="search-options">
+      <option value="OOP란?"></option>
+      <option value="객체"></option>
+      <option value="클래스"></option>
+      <option value="상속"></option>
+      <option value="다형성"></option>
+      <option value="Java 생성자"></option>
+      <option value="Java ArrayList"></option>
+      <option value="Python 리스트"></option>
+      <option value="Python 클래스"></option>
+      <option value="코드 문법 비교"></option>
+      <option value="건의"></option>
+    </datalist>
+
+    <main class="suggestion-shell">
+      <section class="suggestion-intro">
+        <span class="doc-label">Suggestion</span>
+        <h1>건의 사항</h1>
+        <p>
+          설명이 틀렸거나 예시 코드가 어색한 부분이 있다면 아래에 남겨주세요.
+          입력한 내용은 현재 브라우저에 저장됩니다.
+        </p>
+      </section>
+
+      <section class="suggestion-card">
+        <form id="suggestionForm">
+          <label for="suggestionPage">관련 페이지</label>
+          <select id="suggestionPage">
+            <option value="OOP">OOP</option>
+            <option value="Java">Java</option>
+            <option value="Python">Python</option>
+            <option value="Compare">Compare</option>
+            <option value="Home">Home</option>
+          </select>
+
+          <label for="suggestionText">수정하거나 추가하면 좋을 내용</label>
+          <textarea id="suggestionText" rows="7" placeholder="예: Java 상속 설명에 super 예시를 추가하면 좋겠습니다."></textarea>
+
+          <button class="primary-btn suggestion-submit" type="submit">건의 등록</button>
+        </form>
+      </section>
+
+      <section class="suggestion-list-section">
+        <div class="suggestion-list-header">
+          <h2>등록된 건의</h2>
+          <button class="ghost-btn" id="clearSuggestions" type="button">전체 삭제</button>
+        </div>
+        <ul class="suggestion-list" id="suggestionList"></ul>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
