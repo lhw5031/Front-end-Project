@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>건의 사항 - OOP Docs</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
     <header class="site-header">
@@ -21,9 +21,21 @@
 
       <div class="header-tools">
         <form class="header-search" data-search-form role="search">
-          <input type="search" list="search-options" placeholder="문서 검색..." aria-label="문서 검색" />
+          <input
+            type="search"
+            list="search-options"
+            placeholder="문서 검색..."
+            aria-label="문서 검색"
+          />
         </form>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크모드 전환">◐</button>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="다크모드 전환"
+        >
+          ◐
+        </button>
       </div>
     </header>
 
@@ -63,21 +75,29 @@
           </select>
 
           <label for="suggestionText">수정하거나 추가하면 좋을 내용</label>
-          <textarea id="suggestionText" rows="7" placeholder="예: Java 상속 설명에 super 예시를 추가하면 좋겠습니다."></textarea>
+          <textarea
+            id="suggestionText"
+            rows="7"
+            placeholder="예: Java 상속 설명에 super 예시를 추가하면 좋겠습니다."
+          ></textarea>
 
-          <button class="primary-btn suggestion-submit" type="submit">건의 등록</button>
+          <button class="primary-btn suggestion-submit" type="submit">
+            건의 등록
+          </button>
         </form>
       </section>
 
       <section class="suggestion-list-section">
         <div class="suggestion-list-header">
           <h2>등록된 건의</h2>
-          <button class="ghost-btn" id="clearSuggestions" type="button">전체 삭제</button>
+          <button class="ghost-btn" id="clearSuggestions" type="button">
+            전체 삭제
+          </button>
         </div>
         <ul class="suggestion-list" id="suggestionList"></ul>
       </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>
